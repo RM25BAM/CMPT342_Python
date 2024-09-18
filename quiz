@@ -1,0 +1,48 @@
+def main():
+    month_rain = getInput()
+    displayResult(month_rain)
+def getInput():
+    month_rain = []
+    month = ['January', 'February','March','April', 'May','June', 'July', 'August', 'September','October','November','December']
+    i = 0
+    while i < 12:
+        try:
+            user = int(input(f"Enter the rainfall for {month[i]}: "))
+            if (user > 0):
+                month_rain.append(int(user))
+                i += 1
+            elif (user < 0):
+                print('Negative value entered.')
+                continue
+        except ValueError:
+            print('Non-numeric value entered.')
+            while i < 12:
+                user = int(input(f"Enter the rainfall for {month[i]}: "))
+                if (user > 0):
+                    month_rain.append(int(user))
+                    i += 1
+                elif (user < 0):
+                    print('Negative value entered.')
+                    continue
+    return month_rain
+def displayResult(month_rain):
+    index_month = []
+    month = ['January', 'February','March','April', 'May','June', 'July', 'August', 'September','October','November','December']
+    Total_rain = sum(month_rain) #change to f string
+    Average_rain = round(sum(month_rain)/len(month_rain), 2)
+    min_rain = min(month_rain)
+    for i in range(len(month_rain)):
+        if (month_rain[i] == min_rain):
+            index_month.append(i)
+    print(f'Total rainfall: {Total_rain:.2f} inches')
+    print(f'Average rainfall: {Average_rain} inches')
+    print(f'Lowest rainfall is {min_rain} inches in:', end ="")
+    for i in range(len(index_month)):
+        if i < len(index_month)-1:
+            indexN = index_month[i]
+            print(f' {month[indexN]},',end = "")
+        else:
+            indexN = index_month[i]
+            print(f' {month[indexN]}')
+main()
+
